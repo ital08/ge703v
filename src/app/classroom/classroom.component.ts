@@ -16,116 +16,165 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassroomComponent implements OnInit {
   dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  columnsToDisplay = ['Numero', 'Apellidos', 'Nombres'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: PeriodicElement | null;
   constructor() { }
 
   ngOnInit(): void {
+    increaseValue(),
+    decreaseValue(),
   }
 
 }
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
+  Numero: number;
+  Apellidos: string;
+  Nombres: string;
+  puntos: number;
 }
 
 export class TableExpandableRowsExample {
   dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  columnsToDisplay = ['Numero', 'Apellidos', 'Nombres'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: PeriodicElement | null;
 }
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    position: 1,
-    name: 'Hydrogen',
-    weight: 1.0079,
-    symbol: 'H',
-    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
+    Numero: 1,
+    Apellidos: 'Hydrogen',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 2,
-    name: 'Helium',
-    weight: 4.0026,
-    symbol: 'He',
-    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`,
+    Numero: 2,
+    Apellidos: 'Helium',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 3,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`,
+    Numero: 3,
+    Apellidos: 'Lithium',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 4,
-    name: 'Beryllium',
-    weight: 9.0122,
-    symbol: 'Be',
-    description: `Beryllium is a chemical element with symbol Be and atomic number 4. It is a
-        relatively rare element in the universe, usually occurring as a product of the spallation of
-        larger atomic nuclei that have collided with cosmic rays.`,
+    Numero: 4,
+    Apellidos: 'Beryllium',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 5,
-    name: 'Boron',
-    weight: 10.811,
-    symbol: 'B',
-    description: `Boron is a chemical element with symbol B and atomic number 5. Produced entirely
-        by cosmic ray spallation and supernovae and not by stellar nucleosynthesis, it is a
-        low-abundance element in the Solar system and in the Earth's crust.`,
+    Numero: 5,
+    Apellidos: 'Boron',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 6,
-    name: 'Carbon',
-    weight: 12.0107,
-    symbol: 'C',
-    description: `Carbon is a chemical element with symbol C and atomic number 6. It is nonmetallic
-        and tetravalent—making four electrons available to form covalent chemical bonds. It belongs
-        to group 14 of the periodic table.`,
+    Numero: 6,
+    Apellidos: 'Carbon',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 7,
-    name: 'Nitrogen',
-    weight: 14.0067,
-    symbol: 'N',
-    description: `Nitrogen is a chemical element with symbol N and atomic number 7. It was first
-        discovered and isolated by Scottish physician Daniel Rutherford in 1772.`,
+    Numero: 7,
+    Apellidos: 'Nitrogen',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 8,
-    name: 'Oxygen',
-    weight: 15.9994,
-    symbol: 'O',
-    description: `Oxygen is a chemical element with symbol O and atomic number 8. It is a member of
-         the chalcogen group on the periodic table, a highly reactive nonmetal, and an oxidizing
-         agent that readily forms oxides with most elements as well as with other compounds.`,
+    Numero: 8,
+    Apellidos: 'Oxygen',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 9,
-    name: 'Fluorine',
-    weight: 18.9984,
-    symbol: 'F',
-    description: `Fluorine is a chemical element with symbol F and atomic number 9. It is the
-        lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard
-        conditions.`,
+    Numero: 9,
+    Apellidos: 'Fluorine',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
   {
-    position: 10,
-    name: 'Neon',
-    weight: 20.1797,
-    symbol: 'Ne',
-    description: `Neon is a chemical element with symbol Ne and atomic number 10. It is a noble gas.
-        Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about
-        two-thirds the density of air.`,
+    Numero: 10,
+    Apellidos: 'Neon',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 11,
+    Apellidos: 'Hydrogen',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 12,
+    Apellidos: 'Helium',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 13,
+    Apellidos: 'Lithium',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 14,
+    Apellidos: 'Beryllium',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 15,
+    Apellidos: 'Boron',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 16,
+    Apellidos: 'Carbon',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 17,
+    Apellidos: 'Nitrogen',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 18,
+    Apellidos: 'Oxygen',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 19,
+    Apellidos: 'Fluorine',
+    Nombres: 'DADSA',
+    puntos: 0 ,
+  },
+  {
+    Numero: 20,
+    Apellidos: 'Neon',
+    Nombres: 'DADSA',
+    puntos: 0 ,
   },
 ];
+
+function increaseValue() {
+  let value = expandedElement.puntos;
+  // var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  // document.getElementById('number').value = value;
+}
+
+function decreaseValue() {
+  var value = parseInt(document.getElementById('number').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value < 1 ? value = 1 : '';
+  value--;
+  document.getElementById('number').value = value;
+}
