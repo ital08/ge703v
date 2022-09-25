@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,10 +11,19 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   constructor(
     private route:Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: ActivatedRoute,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
+    this.router.queryParams
+    .subscribe(params => {
+      if(params.error=='1'){
+        this.toastr.warning('No se pudo encontrar el curso','Atención')
+      }
+    }
+  );
     this.createLoginForm();
   }
   createLoginForm(){
