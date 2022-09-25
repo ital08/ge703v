@@ -16,165 +16,73 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassroomComponent implements OnInit {
   dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['Numero', 'Apellidos', 'Nombres'];
+  columnsToDisplay = ['Numero', 'Apellido', 'Nombre'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: PeriodicElement | null;
   constructor() { }
 
   ngOnInit(): void {
-    increaseValue(),
-    decreaseValue(),
+  }
+  increaseValue(student: PeriodicElement){
+    // let value = student.puntos;
+    // value = isNaN(value) ? 0 : value;
+    // value++;
+  }
+  decreaseValue(student: any){
+    let value = student.puntos;
+    value = isNaN(value) ? 0 : value;
+    value < 1 ? value = 1 : '';
+    value--;
   }
 
 }
 export interface PeriodicElement {
-  Numero: number;
-  Apellidos: string;
-  Nombres: string;
-  puntos: number;
+  id: number;
+  codigoUni: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  nombre: string;
+  s1: number ;
+  s2: number ;
+  s3: number ;
+  s4: number ;
+  s5: number ;
+  s6: number ;
+  s7: number ;
+  s8: number ;
+  s9: number ;
+  s10: number ;
+  s11: number ;
+  s12: number ;
+  s13: number ;
+  s14: number ;
+  s15: number ;
+  s16: number ;
 }
 
-export class TableExpandableRowsExample {
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['Numero', 'Apellidos', 'Nombres'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement: PeriodicElement | null;
-}
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    Numero: 1,
-    Apellidos: 'Hydrogen',
-    Nombres: 'DADSA',
-    puntos: 0 ,
+    id: 1,
+    codigoUni: '20191124F',
+    apellidoPaterno: 'Chambi',
+    apellidoMaterno: 'Talaverano',
+    nombre: 'Marcelo',
+    s1: 0 ,
+    s2: 0 ,
+    s3: 0 ,
+    s4: 0 ,
+    s5: 0 ,
+    s6: 0 ,
+    s7: 0 ,
+    s8: 0 ,
+    s9: 0 ,
+    s10: 0 ,
+    s11: 0 ,
+    s12: 0 ,
+    s13: 0 ,
+    s14: 0 ,
+    s15: 0 ,
+    s16: 0 ,
   },
-  {
-    Numero: 2,
-    Apellidos: 'Helium',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 3,
-    Apellidos: 'Lithium',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 4,
-    Apellidos: 'Beryllium',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 5,
-    Apellidos: 'Boron',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 6,
-    Apellidos: 'Carbon',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 7,
-    Apellidos: 'Nitrogen',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 8,
-    Apellidos: 'Oxygen',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 9,
-    Apellidos: 'Fluorine',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 10,
-    Apellidos: 'Neon',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 11,
-    Apellidos: 'Hydrogen',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 12,
-    Apellidos: 'Helium',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 13,
-    Apellidos: 'Lithium',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 14,
-    Apellidos: 'Beryllium',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 15,
-    Apellidos: 'Boron',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 16,
-    Apellidos: 'Carbon',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 17,
-    Apellidos: 'Nitrogen',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 18,
-    Apellidos: 'Oxygen',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 19,
-    Apellidos: 'Fluorine',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
-  {
-    Numero: 20,
-    Apellidos: 'Neon',
-    Nombres: 'DADSA',
-    puntos: 0 ,
-  },
+  
 ];
-
-function increaseValue() {
-  let value = expandedElement.puntos;
-  // var value = parseInt(document.getElementById('number').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  // document.getElementById('number').value = value;
-}
-
-function decreaseValue() {
-  var value = parseInt(document.getElementById('number').value, 10);
-  value = isNaN(value) ? 0 : value;
-  value < 1 ? value = 1 : '';
-  value--;
-  document.getElementById('number').value = value;
-}
