@@ -6,10 +6,9 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
-    "noImplicitReturns": false,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
-    "resolveJsonModule": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
@@ -22,16 +21,9 @@
       "dom"
     ],
     "allowSyntheticDefaultImports": true,
-    "noUnusedParameters": false,
-    "noUnusedLocals": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitOverride": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictBindCallApply": true,
-    "esModuleInterop": true
+    
   },
+ 
   "angularCompilerOptions": {
     "noImplicitReturns": false,
     "enableI18nLegacyMessageIdFormat": false,
