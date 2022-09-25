@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    background-image: url('./assets/881563d6444b370fa4ceea0c3183bb4c.gif');
+    background-size: cover;
+    height: 100vh;
+    padding:0;
+    margin:0;
+    font-family: 'Montserrat' !important;
+    font-weight: 600;
+    color: white;
+}
