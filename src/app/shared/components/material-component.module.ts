@@ -43,8 +43,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 @NgModule({
   imports: [
+    MatFormFieldModule,
     MatTableModule,
     MatButtonModule,
     ClipboardModule,
@@ -82,6 +84,7 @@ import { MatButtonModule } from '@angular/material/button';
     PortalModule,
     ScrollingModule],
   exports: [
+    MatFormFieldModule,
     MatTableModule,
     MatButtonModule,
     ClipboardModule,
