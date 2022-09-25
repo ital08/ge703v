@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialComponentModule,
     RecaptchaFormsModule,
     RecaptchaModule,
   ],

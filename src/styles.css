@@ -1,5 +1,7 @@
 body{
-    background-image: url('./assets/881563d6444b370fa4ceea0c3183bb4c.gif');
+    
+  background: #007bff;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
     background-size: cover;
     height: 100vh;
     padding:0;
