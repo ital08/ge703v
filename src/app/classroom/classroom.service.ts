@@ -21,7 +21,7 @@ export class ClassroomService {
         "password": password
       },
       "nombre": data.nombre,
-      "codigo": data.codigoAlumno,
+      "codigoAlumno": data.codigoAlumno,
       "apellidoPaterno": data.apellidoPaterno,
       "apellidoMaterno":data.apellidoMaterno,
       "s1": data.s1,

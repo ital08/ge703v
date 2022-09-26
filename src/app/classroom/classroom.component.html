@@ -19,7 +19,7 @@
                     <div class="col-auto text-end">
                         <div ngbDropdown class="d-inline-block">
                             <button type="button" class="btn btn-warning" id="dropdownBasic1"
-                                ngbDropdownToggle>Semana</button>
+                                ngbDropdownToggle>Semana #</button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                 <button (click)="form.patchValue({
                         numeroSemana:1
@@ -127,28 +127,28 @@
                                         <div [ngSwitch]="form.value.numeroSemana">
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="1">
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue1(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue1(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s1" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue1(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue1(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -157,28 +157,28 @@
                                             </div>
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="2">
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue2(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue2(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s2" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue2(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue2(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -187,58 +187,60 @@
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="3">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue3(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue3(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s3" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue3(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue3(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col">
+                                                            <button (click)="saveValue(i)" [ngClass]="{'parpadea':loadingSave}" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
-                                                            </button></div>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="4">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue4(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue4(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s4" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue4(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue4(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -248,28 +250,28 @@
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="5">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue5(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue5(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s5" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue5(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue5(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -279,28 +281,28 @@
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="6">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue6(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue6(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s6" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue6(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue6(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -310,28 +312,28 @@
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="7">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue7(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue7(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s7" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue7(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue7(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -342,28 +344,28 @@
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="8">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue8(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue8(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s8" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue8(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue8(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -373,28 +375,28 @@
                                             <div class="example-element-detail container-fluid px-0 " *ngSwitchCase="9">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue9(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue9(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s9" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue9(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue9(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -405,28 +407,28 @@
                                                 *ngSwitchCase="10">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue10(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue10(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s10" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue10(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue10(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -437,28 +439,28 @@
                                                 *ngSwitchCase="11">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue11(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue11(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s11" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue11(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue11(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -469,28 +471,28 @@
                                                 *ngSwitchCase="12">
 
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue12(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue12(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s12" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue12(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue12(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -500,28 +502,28 @@
                                             <div class="example-element-detail container-fluid px-0 "
                                                 *ngSwitchCase="13">
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue13(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue13(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s13" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue13(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue13(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -531,28 +533,28 @@
                                             <div class="example-element-detail container-fluid px-0 "
                                                 *ngSwitchCase="14">
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue14(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue14(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s14" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue14(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue14(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -562,28 +564,28 @@
                                             <div class="example-element-detail container-fluid px-0 "
                                                 *ngSwitchCase="15">
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue15(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue15(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s15" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue15(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue15(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -593,28 +595,28 @@
                                             <div class="example-element-detail container-fluid px-0 "
                                                 *ngSwitchCase="16">
                                                 <div class="container-fluid mt-2 mb-2">
-                                                    <div class="row gx-2 gy-0 p-0">
+                                                    <div class="row gx-2 gy-1 p-0">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-danger w-100"
                                                                 (click)="decreaseValue16(i, 1)"
                                                                 value="Decrease Value">-1</button>
                                                         </div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-danger w-100"
+                                                            class="btn btn-success w-100" style="background-color: rgb(160, 57, 57); border-color:rgb(160, 57, 57);"
                                                                 (click)="decreaseValue16(i, 0.5)"
                                                                 value="Decrease Value">-0.5</button></div>
                                                         <div class="col"> <input
                                                                 class="text-center form-control shadow-none w-100"
                                                                 readonly [value]="element.s16" /></div>
                                                         <div class="col"> <button type="button"
-                                                                class="btn btn-success w-100"
+                                                                class="btn btn-success w-100" style="background-color: rgb(105 173 105); border-color:rgb(105 173 105) ;"
                                                                 (click)="increaseValue16(i, 0.5)"
                                                                 value="Increase Value">+0.5</button></div>
                                                         <div class="col"> <button type="button"
                                                                 class="btn btn-success w-100"
                                                                 (click)="increaseValue16(i, 1)"
                                                                 value="Increase Value">+1</button></div>
-                                                        <div class="col"> <button (click)="saveValue(i)" type="button"
+                                                        <div class="col"> <button (click)="saveValue(i)" [disabled]="loadingSave" type="button"
                                                                 class="btn btn-warning w-100"><i class="fa fa-save"></i>
                                                             </button></div>
                                                     </div>
@@ -641,7 +643,7 @@
 
 
 </div>
-<div *ngIf="loadingData" class="loader" style="padding-top:30%">
+<div *ngIf="loadingData" class="loader mt-5 pt-5">
     <span class="loader__element"></span>
     <span class="loader__element"></span>
     <span class="loader__element"></span>

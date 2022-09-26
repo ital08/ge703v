@@ -125,14 +125,18 @@ export class ClassroomComponent implements OnInit {
       }
     )
   }
+  loadingSave=false;
   saveValue(index: number){
+    this.loadingSave=true;
     this.ClassroomService.postData(this.codigo,this.password,this.dataSource[index]).subscribe(
       (response:any)=>{
         let body = response.body;
-        this.toastr.success('Registro Actualizado', 'Exitoso')
+        this.toastr.success('Registro Actualizado', 'Exitoso');
+        this.loadingSave=false;
       },
       (error)=>{
-        this.toastr.error(error.error, 'Error')
+        this.toastr.error(error.error, 'Error');
+        this.loadingSave=false;
       }
     );
   }
