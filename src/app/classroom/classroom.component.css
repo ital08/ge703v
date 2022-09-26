@@ -8,13 +8,25 @@ table {
   }
   
   tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
+    background: rgba(245, 245, 245, 0.274);
   }
   
   tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
+    background: rgba(245, 245, 245, 0.274);
+    ;
   }
   
+  .no-hover-effect.mat-button.mat-primary .mat-button-focus-overlay,
+  .no-hover-effect.mat-button.mat-accent .mat-button-focus-overlay,
+  .no-hover-effect.mat-button.mat-warn .mat-button-focus-overlay
+  {
+    background-color: transparent;
+  }
+
+  .mat-button {
+    background-color: rgba(255, 255, 255, 0) !important;
+  }
+
   .example-element-row td {
     border-bottom-width: 0;
   }
@@ -22,6 +34,15 @@ table {
   .example-element-detail {
     overflow: hidden;
     display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detail {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .example-element-diagram {
@@ -43,66 +64,20 @@ table {
     padding: 16px;
   }
   
+  .input-points{ 
+    text-align: center;
+    width: 20%;
+  }
+
+  /* .detail {
+    align-items: center;
+    justify-content: center;
+  } */
+
   /* .example-element-description-attribution {
     opacity: 0.5;
   } */
 
 
-  form {
-    width: 300px;
-    margin: 0 auto;
-    text-align: center;
-    height: 50px;
-  }
+ 
   
-  .value-button {
-    display: inline-block;
-    border: 1px solid #ddd;
-    margin: 0px;
-    width: 40px;
-    height: 25px;
-    text-align: center;
-    vertical-align: middle;
-    padding: 0;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  .value-button:hover {
-    cursor: pointer;
-  }
-  
-  form #decrease {
-    margin-right: -1px;
-    border-radius: 8px 0 0 8px;
-  }
-  
-  form #increase {
-    margin-left: -1px;
-    border-radius: 0 8px 8px 0;
-  }
-  
-  form #input-wrap {
-    margin: 0px;
-    padding: 0px;
-  }
-  
-  input#number {
-    text-align: center;
-    border: none;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin: 0px;
-    width: 40px;
-    height: 40px;
-  }
-  
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-  }

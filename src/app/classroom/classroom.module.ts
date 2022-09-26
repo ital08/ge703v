@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClassroomComponent } from './classroom.component';
 import { ClassroomRoutingModule } from './classroom-routing.module';
 import { MaterialComponentModule } from '../shared/components/material-component.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -16,7 +16,9 @@ import {NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MaterialComponentModule,
     ClassroomRoutingModule,
     NgbModule,
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgbModule,
   ]
 })
 export class ClassroomModule { }

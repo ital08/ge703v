@@ -1,58 +1,345 @@
 <div class="container-fluid">
-    <div class="row gy-4 mt-2">
+    <div class="row gx-0 gy-4 mt-2">
         <div class="col-12 text-start">
             <button type="button" [routerLink]="'../..'" class="btn btn-danger"><i class="fa fa-home"></i>&nbsp;
                 Regresar</button>
         </div>
-        <div class="col-lg-5 col-md-5">
-            <h1>GE703V</h1>
+        <div class="col-3 text-end">
+            <h1 class="mt-1">GE703V</h1>
         </div>
-        <div class="container-fluid">
-            <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-                <ng-container matColumnDef="Numero">
-                    <th mat-header-cell *matHeaderCellDef> N°</th>
-                    <td mat-cell *matCellDef="let element; let i = dataIndex">{{i + 1}}</td>
-                </ng-container>
-                <ng-container matColumnDef="Apellido">
-                    <th mat-header-cell *matHeaderCellDef> Apellido</th>
-                    <td mat-cell *matCellDef="let element"> {{element.apellidoPaterno}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Nombre">
-                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                </ng-container>
-                <ng-container matColumnDef="expand">
-                    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button aria-label="expand row"
-                            (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-                            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-                <ng-container matColumnDef="expandedDetail">
-                    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-                        <div class="example-element-detail"
-                            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                            <form>
-                                <div class="value-button" id="decrease" (click)="decreaseValue(element)" value="Decrease Value">-</div>
-                                <input type="number" id="number" value="0" />
-                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+        <div class="col-9 text-end p-0">
+            <div class="container p-0">
+                <div class="row gx-0" style="align-items:center; justify-content:end">
+                    <div class="col-auto text-end">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn btn-danger" id="dropdownBasic1"
+                                ngbDropdownToggle>Semana</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button (click)="form.patchValue({
+                        numeroSemana:1
+                    })" ngbDropdownItem>S1</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:2
+                    })" ngbDropdownItem>S2</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:3
+                    })" ngbDropdownItem>S3</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:4
+                    })" ngbDropdownItem>S4</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:5
+                    })" ngbDropdownItem>S5</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:6
+                    })" ngbDropdownItem>S6</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:7
+                    })" ngbDropdownItem>S7</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:8
+                    })" ngbDropdownItem>S8</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:9
+                    })" ngbDropdownItem>S9</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:10
+                    })" ngbDropdownItem>S10</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:11
+                    })" ngbDropdownItem>S11</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:12
+                    })" ngbDropdownItem>S12</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:13
+                    })" ngbDropdownItem>S13</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:14
+                    })" ngbDropdownItem>S14</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:15
+                    })" ngbDropdownItem>S15</button>
+                                <button (click)="form.patchValue({
+                        numeroSemana:16
+                    })" ngbDropdownItem>S16</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-2 ">
+                        <div>
+                            <form [formGroup]="form">
+                                <div class="input">
+                                    <input type="text" class="form-control" style="text-align: center;" readonly formControlName="numeroSemana">
+                                </div>
                             </form>
                         </div>
-                    </td>
-                </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-                <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
-                    [class.example-expanded-row]="expandedElement === element"
-                    (click)="expandedElement = expandedElement === element ? null : element">
-                </tr>
-                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-            </table>
+        <div class="col-12 px-0">
+            <div class="container-fluid px-0">
+                <div class="table-responsive">
+                    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+                        <ng-container matColumnDef="Numero">
+                            <th mat-header-cell *matHeaderCellDef> N°</th>
+                            <td mat-cell *matCellDef="let element; let i = dataIndex">{{i + 1}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="Apellido">
+                            <th mat-header-cell *matHeaderCellDef> Apellido</th>
+                            <td mat-cell *matCellDef="let element"> {{element.apellidoPaterno}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Nombre">
+                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="expand">
+                            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                            <td mat-cell *matCellDef="let element">
+                                <button style="background: none important!; color: white;" mat-button
+                                    aria-label="expand row"
+                                    (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+                                    <mat-icon style="background: none important!; color: white;"
+                                        *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                                    <mat-icon style="background: none important!; color: white;"
+                                        *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expandedDetail">
+                            <td mat-cell *matCellDef="let element;let i = dataIndex"
+                                [attr.colspan]="columnsToDisplayWithExpand.length">
+                                <div class="example-element-detail"
+                                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                    <form>
+
+                                        <div [ngSwitch]="form.value.numeroSemana">
+                                            <div class="detail" *ngSwitchCase="1">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue1(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue1(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s1" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue1(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue1(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="2">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue2(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue2(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s2" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue2(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue2(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="3">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue3(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue3(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s3" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue3(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue3(i, 0.5)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="4">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue4(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue4(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s4" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue4(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue4(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="5">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue5(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue5(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s5" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue5(i, 0.5)"
+                                                    value="Increase Value">+0-5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue5(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="6">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue6(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue6(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s6" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue6(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue6(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="7">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue7(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue7(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s7" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue7(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue7(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="8">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue8(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue8(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s8" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue8(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue8(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="9">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue9(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue9(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s9" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue9(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue9(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="10">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue10(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue10(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s10" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue10(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue10(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="11">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue11(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue11(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s11" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue11(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue11(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="12">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue12(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue12(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s12" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue12(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue12(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="13">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue13(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue13(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s13" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue13(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue13(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="14">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue14(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue14(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s14" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue14(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue14(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="15">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue15(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue15(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s15" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue15(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue15(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                            <div class="detail" *ngSwitchCase="16">
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue16(i, 1)" value="Decrease Value">-1</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="decreaseValue16(i, 0.5)"
+                                                    value="Decrease Value">-0.5</button>
+                                                <input class="input-points" [value]="element.s16" />
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue16(i, 0.5)"
+                                                    value="Increase Value">+0.5</button>
+                                                <button type="button" class="btn btn-dark"
+                                                    (click)="increaseValue16(i, 1)" value="Increase Value">+1</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+                        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+                            class="example-element-row" [class.example-expanded-row]="expandedElement === element"
+                            (click)="expandedElement = expandedElement === element ? null : element">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
