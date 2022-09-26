@@ -9,7 +9,8 @@ import { MaterialComponentModule } from './shared/components/material-component.
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
-
+import { HttpService } from './shared/services/http.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent
@@ -22,13 +23,14 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     RecaptchaFormsModule,
     RecaptchaModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-center',
       preventDuplicates: false,
     }),
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { ExcelService } from '../shared/services/excel.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClassroomService } from './classroom.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-classroom',
@@ -20,42 +22,44 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ClassroomComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   form: FormGroup;
-  codigo:any;
-  loadingData:boolean=true;
-  password:any;
+  codigo: any;
+  loadingData: boolean = true;
+  password: any;
   columnsToDisplay = ['Numero', 'Apellido', 'Nombre'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: PeriodicElement | null;
   constructor(
     private router: Router,
+    private toastr: ToastrService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private ExcelService:ExcelService
+    private ExcelService: ExcelService,
+    private ClassroomService: ClassroomService
   ) { }
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
   ngOnInit(): void {
-    
+
     this.activatedRoute.queryParams.subscribe(params => {
-      this.password  = atob(params['pwd']);
-      this.codigo = atob(params['cod']).toUpperCase();
+      this.password = atob(params['pwd']);
+      this.codigo = atob(params['cod']);
     });
 
     this.createForm();
   }
- 
-  descargar(){
-    let dataExported=[];
+
+  descargar() {
+    let dataExported = [];
     this.dataSource.forEach(element => {
       dataExported.push({
-        codigoUni: element.codigoUni,
+        codigoAlumno: element.codigoAlumno,
         apellidoPaterno: element.apellidoPaterno,
         apellidoMaterno: element.apellidoMaterno,
         nombre: element.nombre,
         s1: element.s1,
         s2: element.s2,
-        s3:element.s3,
+        s3: element.s3,
         s4: element.s4,
         s5: element.s5,
         s6: element.s6,
@@ -63,142 +67,191 @@ export class ClassroomComponent implements OnInit {
         s8: element.s8,
         s9: element.s9,
         s10: element.s10,
-        s11:element.s11,
-        s12:element.s12,
+        s11: element.s11,
+        s12: element.s12,
         s13: element.s13,
-        s14:element.s14,
+        s14: element.s14,
         s15: element.s15,
         s16: element.s16
       })
     });
-    this.ExcelService.generateExcel(dataExported,this.codigo)
+    this.ExcelService.generateExcel(dataExported, this.codigo)
   }
   async createForm() {
     this.form = this.fb.group({
       numeroSemana: 1
     })
     this.form.controls['numeroSemana'].valueChanges.subscribe(value => console.log(value))
-    
-    await this.delay(3000);
-    this.loadingData = !this.loadingData
-  }
 
-  increaseValue1(index: number, p:number) {
+    this.getData()
+  }
+  getData() {
+    this.loadingData=true;
+    this.ClassroomService.getData(this.codigo, this.password).subscribe(
+      (response: any) => {
+        this.dataSource = [];
+        if (response.body) {
+          let body = response.body;
+          body.forEach(element => {
+            this.dataSource.push({
+              _id: element._id,
+              codigoAlumno: element.codigoAlumno,
+              apellidoPaterno: element.apellidoPaterno,
+              apellidoMaterno: element.apellidoMaterno,
+              nombre: element.nombre,
+              s1: element.s1,
+              s2: element.s2,
+              s3: element.s3,
+              s4: element.s4,
+              s5: element.s5,
+              s6: element.s6,
+              s7: element.s7,
+              s8: element.s8,
+              s9: element.s9,
+              s10: element.s10,
+              s11: element.s11,
+              s12: element.s12,
+              s13: element.s13,
+              s14: element.s14,
+              s15: element.s15,
+              s16: element.s16,
+            })
+          });
+          this.loadingData=!this.loadingData;
+        }
+      },
+      (error: any) => {
+        this.toastr.error(error.error, 'Error')
+      }
+    )
+  }
+  saveValue(index: number){
+    this.ClassroomService.postData(this.codigo,this.password,this.dataSource[index]).subscribe(
+      (response:any)=>{
+        let body = response.body;
+        this.toastr.success('Registro Actualizado', 'Exitoso')
+      },
+      (error)=>{
+        this.toastr.error(error.error, 'Error')
+      }
+    );
+  }
+  increaseValue1(index: number, p: number) {
     this.dataSource[index].s1 = this.dataSource[index].s1 + p;
   }
-  decreaseValue1(index: number, p:number) {
+  decreaseValue1(index: number, p: number) {
     this.dataSource[index].s1 = this.dataSource[index].s1 - p;
   }
-  
-  increaseValue2(index: number, p:number) {
+
+  increaseValue2(index: number, p: number) {
     this.dataSource[index].s2 = this.dataSource[index].s2 + p;
   }
-  decreaseValue2(index: number, p:number) {
+  decreaseValue2(index: number, p: number) {
     this.dataSource[index].s2 = this.dataSource[index].s2 - p;
   }
 
-  increaseValue3(index: number, p:number) {
+  increaseValue3(index: number, p: number) {
     this.dataSource[index].s3 = this.dataSource[index].s3 + p;
   }
-  decreaseValue3(index: number, p:number) {
+  decreaseValue3(index: number, p: number) {
     this.dataSource[index].s3 = this.dataSource[index].s3 - p;
   }
 
-  increaseValue4(index: number, p:number) {
+  increaseValue4(index: number, p: number) {
     this.dataSource[index].s4 = this.dataSource[index].s4 + p;
   }
-  decreaseValue4(index: number, p:number) {
+  decreaseValue4(index: number, p: number) {
     this.dataSource[index].s4 = this.dataSource[index].s4 - p;
   }
 
-  increaseValue5(index: number, p:number) {
+  increaseValue5(index: number, p: number) {
     this.dataSource[index].s5 = this.dataSource[index].s5 + p;
   }
-  decreaseValue5(index: number, p:number) {
+  decreaseValue5(index: number, p: number) {
     this.dataSource[index].s5 = this.dataSource[index].s5 - p;
   }
 
-  increaseValue6(index: number, p:number) {
+  increaseValue6(index: number, p: number) {
     this.dataSource[index].s6 = this.dataSource[index].s6 + p;
   }
-  decreaseValue6(index: number, p:number) {
+  decreaseValue6(index: number, p: number) {
     this.dataSource[index].s6 = this.dataSource[index].s6 - p;
   }
 
-  increaseValue7(index: number, p:number) {
+  increaseValue7(index: number, p: number) {
     this.dataSource[index].s7 = this.dataSource[index].s7 + p;
   }
-  decreaseValue7(index: number, p:number) {
+  decreaseValue7(index: number, p: number) {
     this.dataSource[index].s7 = this.dataSource[index].s7 - p;
   }
 
-  increaseValue8(index: number, p:number) {
+  increaseValue8(index: number, p: number) {
     this.dataSource[index].s8 = this.dataSource[index].s8 + p;
   }
-  decreaseValue8(index: number, p:number) {
+  decreaseValue8(index: number, p: number) {
     this.dataSource[index].s8 = this.dataSource[index].s8 - p;
   }
 
-  increaseValue9(index: number, p:number) {
+  increaseValue9(index: number, p: number) {
     this.dataSource[index].s9 = this.dataSource[index].s9 + p;
   }
-  decreaseValue9(index: number, p:number) {
+  decreaseValue9(index: number, p: number) {
     this.dataSource[index].s9 = this.dataSource[index].s9 - p;
   }
 
-  increaseValue10(index: number, p:number) {
+  increaseValue10(index: number, p: number) {
     this.dataSource[index].s10 = this.dataSource[index].s10 + p;
   }
-  decreaseValue10(index: number, p:number) {
+  decreaseValue10(index: number, p: number) {
     this.dataSource[index].s10 = this.dataSource[index].s10 - p;
   }
-  
-  increaseValue11(index: number, p:number) {
+
+  increaseValue11(index: number, p: number) {
     this.dataSource[index].s11 = this.dataSource[index].s11 + p;
   }
-  decreaseValue11(index: number, p:number) {
+  decreaseValue11(index: number, p: number) {
     this.dataSource[index].s11 = this.dataSource[index].s11 - p;
   }
 
-  increaseValue12(index: number, p:number) {
+  increaseValue12(index: number, p: number) {
     this.dataSource[index].s12 = this.dataSource[index].s12 + p;
   }
-  decreaseValue12(index: number, p:number) {
+  decreaseValue12(index: number, p: number) {
     this.dataSource[index].s12 = this.dataSource[index].s12 - p;
   }
 
-  increaseValue13(index: number, p:number) {
+  increaseValue13(index: number, p: number) {
     this.dataSource[index].s13 = this.dataSource[index].s13 + p;
   }
-  decreaseValue13(index: number, p:number) {
+  decreaseValue13(index: number, p: number) {
     this.dataSource[index].s13 = this.dataSource[index].s13 - p;
   }
 
-  increaseValue14(index: number, p:number) {
+  increaseValue14(index: number, p: number) {
     this.dataSource[index].s14 = this.dataSource[index].s14 + p;
   }
-  decreaseValue14(index: number, p:number) {
+  decreaseValue14(index: number, p: number) {
     this.dataSource[index].s14 = this.dataSource[index].s14 - p;
   }
 
-  increaseValue15(index: number, p:number) {
+  increaseValue15(index: number, p: number) {
     this.dataSource[index].s15 = this.dataSource[index].s15 + p;
   }
-  decreaseValue15(index: number, p:number) {
+  decreaseValue15(index: number, p: number) {
     this.dataSource[index].s15 = this.dataSource[index].s15 - p;
   }
 
-  increaseValue16(index: number, p:number) {
+  increaseValue16(index: number, p: number) {
     this.dataSource[index].s16 = this.dataSource[index].s16 + p;
   }
-  decreaseValue16(index: number, p:number) {
+  decreaseValue16(index: number, p: number) {
     this.dataSource[index].s16 = this.dataSource[index].s16 - p;
   }
 
 }
 export interface PeriodicElement {
-  id: number;
-  codigoUni: string;
+  _id: number;
+  codigoAlumno: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
   nombre: string;
@@ -222,8 +275,8 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    id: 1,
-    codigoUni: '20191124F',
+    _id: 1,
+    codigoAlumno: '20191124F',
     apellidoPaterno: 'Chambi',
     apellidoMaterno: 'Talaverano',
     nombre: 'Marcelo',
@@ -244,879 +297,4 @@ const ELEMENT_DATA: PeriodicElement[] = [
     s15: 0,
     s16: 0,
   },
-  {
-    id: 2,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 3,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 4,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 5,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 6,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 7,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 8,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 9,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 10,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 11,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 12,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 13,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 14,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-  {
-    id: 15,
-    codigoUni: '20191124F',
-    apellidoPaterno: 'Chambi',
-    apellidoMaterno: 'Talaverano',
-    nombre: 'Marcelo',
-    s1: 0,
-    s2: 0,
-    s3: 0,
-    s4: 0,
-    s5: 0,
-    s6: 0,
-    s7: 0,
-    s8: 0,
-    s9: 0,
-    s10: 0,
-    s11: 0,
-    s12: 0,
-    s13: 0,
-    s14: 0,
-    s15: 0,
-    s16: 0,
-  },
-
 ];
