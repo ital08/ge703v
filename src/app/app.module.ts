@@ -22,7 +22,6 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     RecaptchaFormsModule,
     RecaptchaModule,
-    
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-center',
