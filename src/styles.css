@@ -21,7 +21,7 @@ body {
   position: absolute;
   width: 100%;
   z-index: 2;
-  height: calc(100vh - 72px);
+  height: calc(100vh - 64.5px);
 }
 
 .circles {
@@ -48,21 +48,22 @@ body {
 }
 
 .circles li:nth-child(1) {
-  z-index: 2;
-  left: 25%;
-  width: 80px;
-  height: 80px;
-  animation-delay: 0s;
-}
-
-
-.circles li:nth-child(2) {
   left: 10%;
   z-index: 2;
   width: 20px;
   height: 20px;
   animation-delay: 2s;
   animation-duration: 12s;
+}
+
+
+.circles li:nth-child(2) {
+  left: 16%;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  animation-delay: 2s;
+  animation-duration: 18s;
 }
 
 .circles li:nth-child(3) {
@@ -73,11 +74,11 @@ body {
 }
 
 .circles li:nth-child(4) {
-  left: 40%;
-  width: 60px;
-  height: 60px;
-  animation-delay: 0s;
-  animation-duration: 18s;
+  left: 35%;
+  width: 160px;
+  height: 160px;
+  animation-delay:2s;
+  animation-duration: 21s;
 }
 
 .circles li:nth-child(5) {
@@ -118,27 +119,88 @@ body {
 }
 
 .circles li:nth-child(10) {
-  left: 85%;
+  left: 95%;
   width: 150px;
   height: 150px;
   animation-delay: 0s;
   animation-duration: 11s;
 }
+.circles li:nth-child(11) {
+  left: 5%;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  animation-delay: 2s;
+  animation-duration: 15s;
+}
 
+.circles li:nth-child(12) {
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 4s;
+}
+
+.circles li:nth-child(13) {
+  left: 2%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+  animation-duration: 18s;
+}
+
+.circles li:nth-child(14) {
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 1s;
+}
+.circles li:nth-child(15) {
+  left: 45%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+  animation-duration: 19s;
+}
+.circles li:nth-child(16) {
+  left: 75%;
+  width: 110px;
+  height: 110px;
+  animation-delay: 3s;
+}
+
+.circles li:nth-child(17) {
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 7s;
+}
+
+.circles li:nth-child(18) {
+  left: 40%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 15s;
+  animation-duration: 45s;
+}
 
 
 @keyframes animate {
 
   0% {
+    transform: translateY(-1000px) rotate(0deg);
+    opacity: 0;
+    border-radius: 0%;
+  }
+  50% {
     transform: translateY(0) rotate(0deg);
     opacity: 1;
-    border-radius: 0;
+    border-radius: 0%;
   }
-
   100% {
     transform: translateY(-1000px) rotate(720deg);
     opacity: 0;
-    border-radius: 50%;
+    border-radius: 100%;
   }
 
 }
