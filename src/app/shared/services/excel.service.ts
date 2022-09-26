@@ -6,7 +6,7 @@ import { Workbook } from 'exceljs';
 })
 export class ExcelService {
   constructor() { }
-  generateExcel(userList) {
+  generateExcel(userList:any,data:any) {
 
     // const header = Object.keys(userList[0])
     const workbook = new Workbook()
@@ -30,7 +30,7 @@ export class ExcelService {
     })
     workbook.xlsx.writeBuffer().then(excelData => {
       const blob = new Blob([excelData], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-      fs.saveAs(blob, 'UserReport.xlsx')
+      fs.saveAs(blob, `${data.toUpperCase()}_ReportePuntos.xlsx`)
     })
   }
 }

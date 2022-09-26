@@ -10,10 +10,13 @@
 /node_modules
 
 # profiling files
-chrome-profiler-events*.json
 package-lock.json
+.package-lock.json
+chrome-profiler-events*.json
 # IDEs and editors
 /.idea
+./package-lock.json
+
 .project
 .classpath
 .c9/
@@ -36,6 +39,7 @@ package-lock.json
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
+package-lock.json
 testem.log
 /typings
 

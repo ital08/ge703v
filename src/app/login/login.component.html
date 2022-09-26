@@ -1,6 +1,5 @@
-<div id="page-content">
-  <form [formGroup]="form">
-    <div class="container mt-5 mx-auto my-auto">
+<form [formGroup]="form">
+    <div class="container-fluid mx-auto my-auto align-middle" >
       <div class="row gy-2 justify-content-center">
         <div class="col-sm-12 col-md-10 col-lg-7 text-center">
           <h1 class="fw-light mt-4 text-white">INICIAR SESIÓN</h1>
@@ -25,11 +24,6 @@
           <button [disabled]="form.invalid" type="button" (click)="login()"
             class="w-100 btn btn-success signup-btn">Ingresar</button>
         </div>
-        <div class="col-sm-12 col-md-10 col-lg-7 text-center">
-          <button  type="button" (click)="descargar()"
-            class="w-100 btn btn-warning">descargar</button>
-        </div>
       </div>
     </div>
   </form>
-</div>

@@ -37,10 +37,7 @@ export class LoginComponent implements OnInit {
   login(){
     let codigo:string = this.form.value.codigo;
     let password:string = this.form.value.password;
-    this.route.navigate([`classroom/${codigo}`], { queryParams:{ password: password}});
-  }
-  descargar(){
-    this.ExcelService.generateExcel(userList)
+    this.route.navigate([`classroom`], { queryParams:{ pwd: btoa(password),cod: btoa(codigo)}});
   }
 
 }

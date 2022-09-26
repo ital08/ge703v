@@ -13,6 +13,7 @@ const routes: Routes = [
     path: 'classroom',
     children: [
       { path: '', loadChildren: () => import('./classroom/classroom.module').then(a => a.ClassroomModule) },
+      { path: '**', pathMatch: 'full',  redirectTo: '' }
     ]
   },
   { path: '**', pathMatch: 'full',  redirectTo: '' }];
